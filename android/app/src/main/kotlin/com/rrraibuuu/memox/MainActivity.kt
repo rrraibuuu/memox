@@ -1,0 +1,6 @@
+package com.rrraibuuu.memox
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}

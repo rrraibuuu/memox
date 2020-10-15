@@ -1,0 +1,45 @@
+name: memox
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^0.1.3
+
+  line_icons:
+
+  provider:
+
+  firebase_core:
+  cloud_firestore:
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_native_splash: ^0.1.9
+
+flutter:
+
+  uses-material-design: true
+
+  fonts:
+    - family: Sacramento
+      fonts:
+        - asset: assets/fonts/Sacramento-Regular.ttf
+
+    - family: Font
+      fonts:
+        - asset: assets/fonts/NagomiGokubosoGothic-ExtraLight.otf
+
+flutter_native_splash:
+  image: "assets/images/Memo.png"
+  color: "FFFFFF"

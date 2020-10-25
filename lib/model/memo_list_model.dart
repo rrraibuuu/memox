@@ -8,12 +8,18 @@ class MemoListModel extends ChangeNotifier {
   Future fetchMemos() async {
     final docs = await Firestore.instance.collection('memo').get();
 
-    final memos = docs.docs
-        .map((doc) =>
-            MemoEntity(doc['title'], doc['body'], doc['date'].toDate()))
-        .toList();
+    final memos = docs.docs.map((doc) => MemoEntity(doc)).toList();
+
+    memos.sort((a, b) => b.date.compareTo(a.date));
 
     this.memos = memos;
     notifyListeners();
   }
+
+  Future deleteMemo(MemoEntity memo) async {
+
+    await Firestore.instance.collection('memo').doc(memo.documentID).delete();
+
+  }
+
 }

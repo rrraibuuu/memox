@@ -1,12 +1,17 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MemoEntity {
 
-  MemoEntity(this.title, this.body, this.date);
+  MemoEntity(DocumentSnapshot doc) {
+    documentID = doc.documentID;
+    title = doc['title'];
+    body = doc['body'];
+    date = doc['date'];
+  }
 
+  String documentID;
   String title;
   String body;
-  DateTime date;
+  Timestamp date;
 
 }

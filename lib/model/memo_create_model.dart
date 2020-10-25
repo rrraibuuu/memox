@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:memox/entity/memo_entity.dart';
 
 class MemoCreateModel extends ChangeNotifier {
 

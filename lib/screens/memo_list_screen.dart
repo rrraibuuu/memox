@@ -6,51 +6,15 @@ import 'package:memox/entity/memo_entity.dart';
 import 'package:memox/model/memo_list_model.dart';
 import 'package:memox/screens/memo_edit_screen.dart';
 import 'package:provider/provider.dart';
-import 'package:shake/shake.dart';
-
 import 'memo_create_screen.dart';
-
-class MemoListScreenFul extends StatefulWidget {
-  @override
-  _MemoListScreenFulState createState() => _MemoListScreenFulState();
-}
-
-class _MemoListScreenFulState extends State<MemoListScreenFul> {
-  @override
-  void initState() {
-    super.initState();
-    ShakeDetector.autoStart(onPhoneShake: () {
-      showDialog(
-          context: context,
-          builder: (context) => CupertinoAlertDialog(
-                title: Text(
-                  "テストダイアログ",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w100, fontFamily: "Font"),
-                ),
-                actions: <Widget>[
-                  CupertinoDialogAction(
-                    child: Text(
-                      "はい",
-                      style: TextStyle(color: Colors.black, fontFamily: "Font"),
-                    ),
-                  ),
-                ],
-              ));
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MemoListScreen();
-  }
-}
 
 class MemoListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MemoListModel>(
-      create: (_) => MemoListModel()..fetchMemos(),
+      create: (_) => MemoListModel()
+        ..shakeGesture()
+        ..fetchMemos(),
       child: Scaffold(
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(100.0),

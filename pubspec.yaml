@@ -23,7 +23,7 @@ dependencies:
 
   flutter_slidable:
 
-  shake:
+  shake: ^0.1.0
   sensors:
 
 dev_dependencies:

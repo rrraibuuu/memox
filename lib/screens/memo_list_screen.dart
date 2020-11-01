@@ -13,7 +13,7 @@ class MemoListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MemoListModel>(
       create: (_) => MemoListModel()
-        ..shakeGesture()
+        ..shakeGesture(context)
         ..fetchMemos(),
       child: Scaffold(
         appBar: PreferredSize(

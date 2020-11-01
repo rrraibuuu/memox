@@ -22,12 +22,13 @@ class MemoListModel extends ChangeNotifier {
     await Firestore.instance.collection('memo').doc(memo.documentID).delete();
   }
 
-  shakeGesture() {
+  shakeGesture(BuildContext context) {
     ShakeDetector detector = ShakeDetector.waitForStart(onPhoneShake: () {
       showDialog(
+          context: context,
           builder: (context) => CupertinoAlertDialog(
                 title: Text(
-                  "テストダイアログ",
+                  "メモをシャッフルしますか？",
                   style: TextStyle(
                       fontWeight: FontWeight.w100, fontFamily: "Font"),
                 ),
@@ -37,10 +38,64 @@ class MemoListModel extends ChangeNotifier {
                       "はい",
                       style: TextStyle(color: Colors.black, fontFamily: "Font"),
                     ),
+                    onPressed: () => shuffleMemo(),
+                  ),
+                  CupertinoDialogAction(
+                    child: Text(
+                      "いいえ",
+                      style: TextStyle(color: Colors.black, fontFamily: "Font"),
+                    ),
+                    onPressed: () => Navigator.pop(context),
                   ),
                 ],
               ));
     });
     detector.startListening();
+  }
+
+  shuffleMemo() async {
+
+    bool shuffleFlg = true;
+    List<String> backUpList;
+
+    if (shuffleFlg) {
+
+      for (int i = 0; memos.length <= i; i++) {
+
+        String backUp = memos[i].body;
+        backUpList.add(backUp);
+
+        List shuffleMemos = memos[i].body.split('');
+        shuffleMemos.shuffle();
+        String afterMemo = shuffleMemos.join();
+
+        final document =
+        Firestore.instance.collection('memo').document(memos[i].documentID);
+        await document.update({
+          'body': afterMemo,
+        });
+
+      }
+
+      shuffleFlg = false;
+
+    } else {
+
+      for (int i = 0; memos.length <= i; i++) {
+
+        String beforeMemo = backUpList[i];
+
+        final document =
+        Firestore.instance.collection('memo').document(memos[i].documentID);
+        await document.update({
+          'body': beforeMemo,
+        });
+
+      }
+
+    }
+
+
+
   }
 }

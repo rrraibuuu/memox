@@ -7,7 +7,6 @@ class MemoEditModel extends ChangeNotifier {
   String title = "";
   String body = "";
   DateTime date = DateTime.now();
-  String memoBackUp = "";
 
   Future updateMemoToFirebase(MemoEntity memo) async {
     final document =
@@ -17,18 +16,6 @@ class MemoEditModel extends ChangeNotifier {
       'body': body,
       'date': date,
     });
-  }
-
-  Future shuffleMemo(MemoEntity memo) async {
-
-    final document =
-    Firestore.instance.collection('memo').document(memo.documentID);
-    await document.update({
-      'title': title,
-      'body': body,
-      'date': date,
-    });
-
   }
 
 }

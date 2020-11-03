@@ -6,6 +6,8 @@ import 'package:shake/shake.dart';
 
 class MemoListModel extends ChangeNotifier {
   List<MemoEntity> memos = [];
+  List<String> backUpList;
+  String backUp;
 
   Future fetchMemos() async {
     final docs = await Firestore.instance.collection('memo').get();
@@ -62,12 +64,10 @@ class MemoListModel extends ChangeNotifier {
 
       for (int i = 0; memos.length <= i; i++) {
 
-        String backUp = memos[i].body;
+        backUp = memos[i].body;
         backUpList.add(backUp);
 
-        List shuffleMemos = memos[i].body.split('');
-        shuffleMemos.shuffle();
-        String afterMemo = shuffleMemos.join();
+        String afterMemo = stringShuffle(memos[i].body);
 
         final document =
         Firestore.instance.collection('memo').document(memos[i].documentID);
@@ -95,7 +95,15 @@ class MemoListModel extends ChangeNotifier {
 
     }
 
+  }
 
+  String stringShuffle(String body) {
+
+    List shuffleMemos = body.split('');
+    shuffleMemos.shuffle();
+    String afterMemo = shuffleMemos.join();
+
+    return afterMemo;
 
   }
 }

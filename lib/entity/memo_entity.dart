@@ -9,9 +9,9 @@ class MemoEntity {
     date = doc['date'];
   }
 
-  String documentID;
-  String title;
-  String body;
-  Timestamp date;
+  String documentID = "";
+  String title = "";
+  String body = "";
+  Timestamp date = Timestamp.now();
 
 }
